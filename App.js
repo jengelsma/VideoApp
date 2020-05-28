@@ -1,19 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import VideoListScreen from './screens/VideoListScreen';
+import YTViewerScreen from './screens/YTViewerScreen';
 
 export default function App() {
+  const Stack = createStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Video List"
+          component={VideoListScreen}
+          options={{ title: 'Beekeeping Videos' }}
+        />
+        <Stack.Screen name="Video Viewer" component={YTViewerScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: 'green',
+    alignItems: 'stretch',
     justifyContent: 'center',
+    borderWidth: 1,
+    flexDirection: 'column',
+    flexWrap: 'wrap',
   },
 });
