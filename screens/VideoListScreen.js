@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { ListItem, Image } from 'react-native-elements';
 import { BaseRouter } from '@react-navigation/native';
 import { getVideos } from '../api/YTServer';
 
@@ -16,9 +17,23 @@ const VideoListScreen = ({ navigation }) => {
 
   const renderVideo = ({index, item}) => {
     return (
-      <View>
-        <Text> {item.snippet.title} </Text>
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Video Viewer', item);
+        }}
+      >
+        <ListItem
+          key={index}
+          chevron
+          title={item.snippet.title}
+          leftElement={
+            <Image 
+              source={{uri: item.snippet.thumbnails.default.url}}
+              style={{ width: 100, height: 55 }}
+            />
+          }
+        />
+      </TouchableOpacity>
     );
   };
 
